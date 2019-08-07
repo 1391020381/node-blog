@@ -1,16 +1,13 @@
 <template>
-  <div id="app">
-    <Header></Header>
-    <router-view />
+  <div class="header">
+    header
   </div>
 </template>
+
 <script>
-import Header from "./components/Header";
 export default {
-  name: "App",
-  components: {
-    Header
-  },
+  name: "Header",
+  components: {},
   props: {},
   data() {
     return {};
@@ -25,4 +22,5 @@ export default {
   watch: {}
 };
 </script>
-<style lang="scss"></style>
+
+<style lang="scss" scoped></style>
