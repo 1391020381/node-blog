@@ -15,9 +15,17 @@ export default (appInfo: EggAppInfo) => {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
   };
 
+  const mongoose = {
+    client: {
+      url: 'mongodb://localhost:27017/egg-blog',
+      option: {},
+      //plugins: [createdPlugin, [updatedPlugin, pluginOptions]]
+    }
+  }
   // the return config will combines to EggAppConfig
   return {
     ...config,
     ...bizConfig,
+    ...mongoose
   };
 };
