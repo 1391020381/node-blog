@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { signup } from "@/api/user.js";
 export default {
   name: "signup",
   components: {},
@@ -40,14 +41,25 @@ export default {
     };
   },
   created() {},
-  mounted() {},
+  mounted() {
+    console.log("2342342", process.env.VUE_APP_BASE_API);
+  },
   activated() {},
   update() {},
   methods: {
     go2Signin() {
       this.$router.push({ name: "signin" });
     },
-    onSubmit() {}
+    async onSubmit() {
+      try {
+        const { result, resultCode } = await signup({});
+        if (resultCode === "1") {
+          console.log(result);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
   },
   filter: {},
   computed: {},
