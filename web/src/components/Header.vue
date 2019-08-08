@@ -1,15 +1,15 @@
 <template>
   <div class="header">
-    <el-row type="flex" justify="space-around">
+    <el-row>
       <el-col :span="12">
-        <div>
+        <div class="header-left">
           <el-link :underline="false">JS之禅</el-link>
           <el-link :underline="false">主页</el-link>
           <el-link :underline="false">关于</el-link>
         </div>
       </el-col>
       <el-col :span="12">
-        <div>
+        <div class="header-right">
           <el-link icon="el-icon-edit">写文章</el-link>
           <el-button type="primary">注册</el-button>
           <el-button>登录</el-button>
@@ -43,5 +43,23 @@ export default {
   height: 52px;
   line-height: 52px;
   padding: 0 280px;
+}
+</style>
+<style lang="scss">
+.header {
+  .header-left {
+    .el-link {
+      margin-left: 15px;
+    }
+  }
+  .header-right {
+    text-align: right;
+    .el-link {
+      margin-left: 15px;
+    }
+    .el-button {
+      margin-left: 15px;
+    }
+  }
 }
 </style>
