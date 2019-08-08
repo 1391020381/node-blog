@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <Header></Header>
+    <SubHeader></SubHeader>
     <router-view />
   </div>
 </template>
 <script>
 import Header from "./components/Header";
+import SubHeader from "./components/SubHeader";
 export default {
   name: "App",
   components: {
-    Header
+    Header,
+    SubHeader
   },
   props: {},
   data() {
