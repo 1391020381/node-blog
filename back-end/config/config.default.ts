@@ -24,7 +24,7 @@ export default (appInfo: EggAppInfo) => {
     client: {
       url: 'mongodb://localhost:27017/egg-blog',
       option: {},
-      //plugins: [createdPlugin, [updatedPlugin, pluginOptions]]
+      // plugins: [createdPlugin, [updatedPlugin, pluginOptions]]
     }
   }
   // the return config will combines to EggAppConfig

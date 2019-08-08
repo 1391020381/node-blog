@@ -52,7 +52,7 @@ export default {
     },
     async onSubmit() {
       try {
-        const { result, resultCode } = await signup({});
+        const { result, resultCode } = await signup(this.signupForm);
         if (resultCode === "1") {
           console.log(result);
         }
