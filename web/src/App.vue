@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-    <SubHeader></SubHeader>
+    <SubHeader v-show="$route.fullPath === '/'"></SubHeader>
     <router-view />
   </div>
 </template>

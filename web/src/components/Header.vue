@@ -11,8 +11,10 @@
       <el-col :span="12">
         <div class="header-right">
           <el-link icon="el-icon-edit">写文章</el-link>
-          <el-button type="primary">注册</el-button>
-          <el-button>登录</el-button>
+          <el-button type="primary" @click="go2Signup" size="small"
+            >注册</el-button
+          >
+          <el-button size="small">登录</el-button>
         </div>
       </el-col>
     </el-row>
@@ -31,7 +33,11 @@ export default {
   mounted() {},
   activated() {},
   update() {},
-  methods: {},
+  methods: {
+    go2Signup() {
+      this.$router.push({ name: "signup" });
+    }
+  },
   filter: {},
   computed: {},
   watch: {}
