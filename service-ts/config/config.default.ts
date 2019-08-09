@@ -12,7 +12,7 @@ export default (appInfo: EggAppInfo) => {
     },
   };
   // add your egg config in here
-  config.middleware = [];
+  config.middleware = ['responseOk'];
   /**
     * @see http://mongodb.github.io/node-mongodb-native/2.2/api/Db.html#createCollection
     */
@@ -28,7 +28,6 @@ export default (appInfo: EggAppInfo) => {
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
   };
-
   // the return config will combines to EggAppConfig
   return {
     ...config,

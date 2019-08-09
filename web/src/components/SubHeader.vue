@@ -1,11 +1,12 @@
 <template>
   <div class="sub-header">
-    <p class="user-name">justsoit</p>
-    <p class="user-email">1391020381@qq.com</p>
+    <p class="user-name">{{ userInfo.userName }}</p>
+    <p class="user-email">{{ userInfo.email }}</p>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "SubHeader",
   components: {},
@@ -19,7 +20,11 @@ export default {
   update() {},
   methods: {},
   filter: {},
-  computed: {},
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.userInfo
+    })
+  },
   watch: {}
 };
 </script>

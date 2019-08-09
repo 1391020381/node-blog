@@ -4,17 +4,25 @@
       <el-col :span="12">
         <div class="header-left">
           <el-link :underline="false">JS之禅</el-link>
-          <el-link :underline="false">主页</el-link>
+          <el-link :underline="false" href="/">主页</el-link>
           <el-link :underline="false">关于</el-link>
         </div>
       </el-col>
       <el-col :span="12">
         <div class="header-right">
           <el-link icon="el-icon-edit">写文章</el-link>
-          <el-button type="primary" @click="go2Signup" size="small"
+          <el-button
+            type="primary"
+            @click="go2Signup"
+            size="small"
+            v-show="!userInfo.userName"
             >注册</el-button
           >
-          <el-button size="small">登录</el-button>
+          <el-button size="small" v-show="userInfo.userName" type="text">{{
+            userInfo.userName
+          }}</el-button>
+          <el-button size="small" v-show="!userInfo.userName">登录</el-button>
+          <el-button size="small" v-show="userInfo.userName">退出</el-button>
         </div>
       </el-col>
     </el-row>
@@ -22,6 +30,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Header",
   components: {},
@@ -39,7 +48,11 @@ export default {
     }
   },
   filter: {},
-  computed: {},
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.userInfo
+    })
+  },
   watch: {}
 };
 </script>

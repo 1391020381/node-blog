@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import { signup } from "@/api/user.js";
 export default {
   name: "signup",
@@ -55,11 +56,14 @@ export default {
         const { result, resultCode } = await signup(this.signupForm);
         if (resultCode === "1") {
           console.log(result);
+          this["user/initUserInfo"](result);
+          this.$router.replace({ name: "home" });
         }
       } catch (e) {
         console.log(e);
       }
-    }
+    },
+    ...mapMutations(["user/initUserInfo"])
   },
   filter: {},
   computed: {},
