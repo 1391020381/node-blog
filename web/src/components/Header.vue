@@ -21,8 +21,15 @@
           <el-button size="small" v-show="userInfo.userName" type="text">{{
             userInfo.userName
           }}</el-button>
-          <el-button size="small" v-show="!userInfo.userName">登录</el-button>
-          <el-button size="small" v-show="userInfo.userName">退出</el-button>
+          <el-button
+            size="small"
+            v-show="!userInfo.userName && $route.name !== 'signin'"
+            @click="go2SignIn"
+            >登录</el-button
+          >
+          <el-button size="small" v-show="userInfo.userName" @click="signOut"
+            >退出</el-button
+          >
         </div>
       </el-col>
     </el-row>
@@ -30,6 +37,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+import { signOut } from "@/api/user";
 import { mapState } from "vuex";
 export default {
   name: "Header",
@@ -45,7 +54,22 @@ export default {
   methods: {
     go2Signup() {
       this.$router.push({ name: "signup" });
-    }
+    },
+    go2SignIn() {
+      this.$router.push({ name: "signin" });
+    },
+    async signOut() {
+      try {
+        const { resultCode } = await signOut({});
+        if (resultCode === "1") {
+          this["user/initUserInfo"]({});
+          sessionStorage.setItem("userInfo", "");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    ...mapMutations(["user/initUserInfo"])
   },
   filter: {},
   computed: {

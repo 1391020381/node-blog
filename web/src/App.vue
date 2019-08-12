@@ -6,6 +6,8 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
+import { signIn } from "@/api/user";
 import Header from "./components/Header";
 import SubHeader from "./components/SubHeader";
 export default {
@@ -18,11 +20,34 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    this.onSubmit();
+  },
   mounted() {},
   activated() {},
   update() {},
-  methods: {},
+  methods: {
+    async onSubmit() {
+      try {
+        if (!sessionStorage.getItem("userInfo")) {
+          return;
+        }
+        let userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
+        let params = {
+          userName: userInfo.userName,
+          passWord: userInfo.passWord
+        };
+        const { result, resultCode } = await signIn(params);
+        if (resultCode === "1") {
+          this["user/initUserInfo"](result);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    ...mapMutations(["user/initUserInfo"])
+  },
   filter: {},
   computed: {},
   watch: {}

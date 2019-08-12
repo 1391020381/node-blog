@@ -28,7 +28,22 @@ export default class User extends Service {
 
 
   }
-  // public async signIn(userName:string,passWord:string,email:string){
-
-  // }
+  public async signIn(userName: string, passWord: string) {
+    try {
+      const result = await this.ctx.model.User.findOne({ userName })
+      this.ctx.logger.info('signIn-查询用户:',result)
+      if (result.passWord === passWord) {
+        return {
+          resultCode: '1',
+          result:result
+        }
+      }
+    } catch (e) {
+      this.ctx.logger.info('e:', e)
+      return {
+        resultCode: '0',
+        result: ''
+      }
+    }
+  }
 }
