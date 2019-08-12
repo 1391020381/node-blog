@@ -7,4 +7,5 @@ export default (app: Application) => {
   router.post('/signUp',controller.user.signUp)
   router.post('/signIn',controller.user.signIn)
   router.post('/signOut',controller.user.signOut)
+  router.post('/publishArticles',controller.post.publishArticles)
 };

@@ -10,7 +10,12 @@
       </el-col>
       <el-col :span="12">
         <div class="header-right">
-          <el-link icon="el-icon-edit">写文章</el-link>
+          <el-link
+            icon="el-icon-edit"
+            v-show="userInfo.userName"
+            @click="go2PublishArticles"
+            >写文章</el-link
+          >
           <el-button
             type="primary"
             @click="go2Signup"
@@ -52,6 +57,9 @@ export default {
   activated() {},
   update() {},
   methods: {
+    go2PublishArticles() {
+      this.$router.push({ name: "markdown" });
+    },
     go2Signup() {
       this.$router.push({ name: "signup" });
     },
@@ -88,7 +96,7 @@ export default {
   padding: 0 280px;
 }
 </style>
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
   .header-left {
     .el-link {
