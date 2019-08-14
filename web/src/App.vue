@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <Header v-show="$route.name !== 'markdown'"></Header>
     <SubHeader v-show="$route.fullPath === '/'"></SubHeader>
     <router-view />
   </div>
