@@ -30,13 +30,13 @@ export default (app)=>{
       default:Date.now()
     }
   });
-  PostSchema.pre('save',function(next){
-    if(this.isNew){
-      this.meta.createdAt = this.meta.updatedAt = Date.now()
-    }else{
-      this.meta.updatedAt = Date.now()
-    }
-   next()
-  })
+  // PostSchema.pre('save',function(next){
+  //   if(this.isNew){
+  //     this.meta.createdAt = this.meta.updatedAt = Date.now()
+  //   }else{
+  //     this.meta.updatedAt = Date.now()
+  //   }
+  //  next()
+  // })
   return mongoose.model('Post', PostSchema);
 }
