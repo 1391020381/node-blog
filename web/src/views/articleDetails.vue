@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { getArticlesDetail } from "@/api/post";
 export default {
   name: "articleDetails",
   components: {},
@@ -12,11 +13,26 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    this.getArticlesDetail();
+  },
   mounted() {},
   activated() {},
   update() {},
-  methods: {},
+  methods: {
+    async getArticlesDetail() {
+      try {
+        const { result, resultCode } = await getArticlesDetail(
+          this.$route.params.id
+        );
+        if (resultCode === "1") {
+          console.log(result);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  },
   filter: {},
   computed: {},
   watch: {}
