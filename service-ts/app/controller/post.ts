@@ -16,8 +16,8 @@ export default class PostController extends Controller {
   public async getArticlesDetail() {
     try {
       const { ctx, service } = this
-      const id = ctx.params.id  // 文章
-      this.ctx.logger.info('ctx.params.id', ctx.params)
+      const id = ctx.query.id  // 文章
+      this.ctx.logger.info('ctx.query.id', ctx.query)
       const authorId = ctx.session.userInfo._id  // 作者
       const result = await service.post.getArticlesDetail(id, authorId)
       ctx.body = result

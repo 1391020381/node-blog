@@ -22,7 +22,7 @@ export default class PostService extends Service {
   }
   public async getArticlesDetail(id: string, authorId: string) {
     try {
-      const result = this.ctx.model.Post.findById(id).populate({ path: 'author', select: 'name', match: { _id: authorId } })
+      const result = await this.ctx.model.Post.findById(id).populate({ path: 'author', select: 'userName', match: { _id: authorId } })
       if (result) {
         return {
           result: result,

@@ -58,7 +58,7 @@ export default {
           console.log(result);
           this.$router.push({
             name: "articleDetails",
-            query: { id: result.author }
+            query: { id: result._id }
           });
         }
       } catch (e) {

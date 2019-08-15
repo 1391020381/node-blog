@@ -23,7 +23,7 @@ export default {
     async getArticlesDetail() {
       try {
         const { result, resultCode } = await getArticlesDetail(
-          this.$route.params.id
+          this.$route.query.id
         );
         if (resultCode === "1") {
           console.log(result);
