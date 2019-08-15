@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { getArticlesDetail } from "@/api/post";
+import { getArticlesDetail, deleteArticles } from "@/api/post";
 export default {
   name: "articleDetails",
   components: {},
@@ -82,7 +82,18 @@ export default {
         }
       });
     },
-    deleteArticle() {},
+    async deleteArticle() {
+      try {
+        const { resultCode } = await deleteArticles({
+          id: this.$route.query.id
+        });
+        if (resultCode === "1") {
+          this.$router.replace({ name: "home" });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {

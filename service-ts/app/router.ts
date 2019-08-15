@@ -10,4 +10,5 @@ export default (app: Application) => {
   router.post('/publishArticles', controller.post.publishArticles)
   router.get('/articlesDetail', controller.post.getArticlesDetail)
   router.post('/updateArticle', controller.post.updateArticles)
+  router.post('/deleteArticles',controller.post.deleteArticles)
 };

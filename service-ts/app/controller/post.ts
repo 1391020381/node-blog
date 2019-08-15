@@ -36,4 +36,14 @@ export default class PostController extends Controller {
       this.ctx.logger.info(e)
     }
   }
+  public async deleteArticles() {
+    try {
+      const { ctx, service } = this
+      const id = ctx.request.body
+      const result = await service.post.deleteArticles(id)
+      ctx.body = result
+    } catch (e) {
+      this.ctx.logger.info(e)
+    }
+  }
 } 
