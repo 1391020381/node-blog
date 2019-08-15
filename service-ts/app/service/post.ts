@@ -38,4 +38,22 @@ export default class PostService extends Service {
       this.ctx.logger.info(e)
     }
   }
+  public async updateArticles(id: string, title: string, content: string) {
+    try {
+      const result = await this.ctx.model.Post.findByIdAndUpdate(id, { title, content, updatedAt: Date.now() })
+      if (result) {
+        return {
+          result: result,
+          resultCode: '1'
+        }
+      } else {
+        return {
+          result: '',
+          resultCode: '0'
+        }
+      }
+    } catch (e) {
+      this.ctx.logger.info(e)
+    }
+  }
 }

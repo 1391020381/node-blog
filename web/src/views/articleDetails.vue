@@ -11,8 +11,12 @@
               >作者:{{ detail.author && detail.author.userName }}</span
             >
             <div class="author-operate">
-              <el-button type="primary" size="small">编辑</el-button>
-              <el-button type="danger" size="small">删除</el-button>
+              <el-button type="primary" size="small" @click="compileArticle"
+                >编辑</el-button
+              >
+              <el-button type="danger" size="small" @click="deleteArticle"
+                >删除</el-button
+              >
             </div>
           </div>
           <div class="article-content" v-html="detail.content"></div>
@@ -69,6 +73,15 @@ export default {
   activated() {},
   update() {},
   methods: {
+    compileArticle() {
+      this.$router.push({
+        name: "markdown",
+        query: {
+          id: this.detail._id
+        }
+      });
+    },
+    deleteArticle() {},
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {

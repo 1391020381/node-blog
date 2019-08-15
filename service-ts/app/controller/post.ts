@@ -25,4 +25,15 @@ export default class PostController extends Controller {
       this.ctx.logger.info(e)
     }
   }
+  public async updateArticles() {
+    try {
+      const { ctx, service } = this
+      const { id, title, content } = ctx.request.body
+      // const authorId = ctx.session.userInfo._id
+      const result = await service.post.updateArticles(id, title, content)
+      ctx.body = result
+    } catch (e) {
+      this.ctx.logger.info(e)
+    }
+  }
 } 

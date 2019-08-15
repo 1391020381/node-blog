@@ -10,8 +10,17 @@
         type="primary"
         size="mini"
         class="el-btn"
-        @click="publishUpdates"
+        v-if="!$route.query.id"
+        @click="publishOrUpdatesArticle"
         >发布</el-button
+      >
+      <el-button
+        type="primary"
+        size="mini"
+        class="el-btn"
+        v-if="$route.query.id"
+        @click="publishOrUpdatesArticle"
+        >更新</el-button
       >
     </div>
     <div class="editor-container">
@@ -26,7 +35,7 @@
 </template>
 
 <script>
-import { publishArticles } from "@/api/post";
+import { publishArticles, getArticlesDetail, updateArticle } from "@/api/post";
 import MarkdownEditor from "@/components/MarkdownEditor";
 export default {
   name: "Markdown",
@@ -41,6 +50,11 @@ export default {
         es: "es_ES"
       }
     };
+  },
+  created() {
+    if (this.$route.query.id) {
+      this.getArticlesDetail();
+    }
   },
   computed: {
     language() {
@@ -65,7 +79,38 @@ export default {
         console.log(e);
       }
     },
-    publishUpdates() {
+    async updateArticle() {
+      try {
+        const { result, resultCode } = await updateArticle({
+          id: this.$route.query.id,
+          title: this.title,
+          content: this.content
+        });
+        if (resultCode === "1") {
+          this.$router.push({
+            name: "articleDetails",
+            query: { id: result._id }
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async getArticlesDetail() {
+      try {
+        const { result, resultCode } = await getArticlesDetail(
+          this.$route.query.id
+        );
+        if (resultCode === "1") {
+          this.title = result.title;
+          this.content = result.content;
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    publishOrUpdatesArticle() {
+      this.getHtml();
       if (!this.title) {
         this.$message({
           message: "请输入文章标题",
@@ -83,7 +128,7 @@ export default {
       this.publishArticles();
     },
     getHtml() {
-      this.html = this.$refs.markdownEditor.getHtml();
+      this.content = this.$refs.markdownEditor.getHtml();
       console.log(this.html);
     }
   }
