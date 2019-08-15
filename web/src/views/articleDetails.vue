@@ -32,6 +32,7 @@
           <el-form-item label="" prop="comment">
             <el-input
               type="textarea"
+              :rows="8"
               v-model="commentForm.comment"
               placeholder="请输入你的评论"
             ></el-input>
