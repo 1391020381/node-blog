@@ -44,6 +44,7 @@ export default {
     return {
       title: "",
       content: "",
+      html: "",
       languageTypeList: {
         en: "en_US",
         zh: "zh_CN",
@@ -84,7 +85,7 @@ export default {
         const { result, resultCode } = await updateArticle({
           id: this.$route.query.id,
           title: this.title,
-          content: this.content
+          content: this.html
         });
         if (resultCode === "1") {
           this.$router.push({
@@ -128,7 +129,7 @@ export default {
       this.publishArticles();
     },
     getHtml() {
-      this.content = this.$refs.markdownEditor.getHtml();
+      this.html = this.$refs.markdownEditor.getHtml();
       console.log(this.html);
     }
   }

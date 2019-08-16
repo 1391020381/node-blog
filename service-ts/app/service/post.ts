@@ -59,7 +59,6 @@ export default class PostService extends Service {
   public async deleteArticles(id: string) {
     try {
       const result = await this.ctx.model.Post.findByIdAndRemove(id)
-      this.ctx.logger.info('deleteArticles:', result)
       if (result) {
         return {
           result: result,

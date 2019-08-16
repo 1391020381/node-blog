@@ -39,7 +39,7 @@ export default class PostController extends Controller {
   public async deleteArticles() {
     try {
       const { ctx, service } = this
-      const id = ctx.request.body
+      const { id } = ctx.request.body  // ctx.request.body 是一个对象需要把 id 解构出来
       const result = await service.post.deleteArticles(id)
       ctx.body = result
     } catch (e) {
