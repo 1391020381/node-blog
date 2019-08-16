@@ -92,3 +92,25 @@ db.post.find('author.$id':'foo')
 
  * MongoDB 3.2之后,也有像sql里join的聚合操作,那就是 $lookup而Mongoose,拥有更强大的 populate() ,可以让你在别的collection中引用 document
  * Population可以自动替换 document中的指定字段，替换内容从其他collection获取。我们可以填充(populate)单个或多个document,单个或多个纯对象,甚至是query返回的一切对象。
+
+* Mongoose分页查询优化,获取数据总长度
+
+```
+var User = require('./user.js')
+
+function getByPager () {
+  var pageSize = 5
+  var currentPage = 1
+  var sort = {'createdDate':-1}
+  var condition = {}
+  var skipNum = { currentPage -1} * pageSize
+  User.find(condition).skip(skipNum).limit(pageSize).sort(sort).exec(function(err,res){
+    if(err){
+      console.log('error:'+ err)
+    }else{
+      console.log('res:'+err)
+    }
+  })
+}
+
+```

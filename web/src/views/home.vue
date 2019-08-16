@@ -1,13 +1,14 @@
 <template>
   <div class="home">
-    home
+    <ArticleList></ArticleList>
   </div>
 </template>
 
 <script>
+import ArticleList from "@/components/ArticleList.vue";
 export default {
   name: "home",
-  components: {},
+  components: { ArticleList },
   props: {},
   data() {
     return {};

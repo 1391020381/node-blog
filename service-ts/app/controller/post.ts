@@ -46,4 +46,15 @@ export default class PostController extends Controller {
       this.ctx.logger.info(e)
     }
   }
+  public async articlesList() {
+    try {
+      const { ctx, service } = this
+      const { currentPage, pageSize } = ctx.request.body
+      // const userInfo = ctx.session.userInfo
+      const result = await service.post.articlesList(+currentPage, +pageSize)
+      ctx.body = result
+    } catch (e) {
+      this.ctx.logger.info(e)
+    }
+  }
 } 
