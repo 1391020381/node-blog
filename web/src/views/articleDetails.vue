@@ -50,6 +50,7 @@
 
 <script>
 import { getArticlesDetail, deleteArticles } from "@/api/post";
+import { createComment, getComment } from "@/api/comment";
 export default {
   name: "articleDetails",
   components: {},
@@ -64,7 +65,8 @@ export default {
         comment: [
           { required: true, message: "请输入你的评论", trigger: "blur" }
         ]
-      }
+      },
+      commentList: []
     };
   },
   created() {
@@ -74,6 +76,29 @@ export default {
   activated() {},
   update() {},
   methods: {
+    async getComment() {
+      try {
+        const { result, resultCode } = await getComment(this.$route.query.id);
+        if (resultCode === "1") {
+          this.commentList = result;
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async createComment() {
+      try {
+        const { resultCode } = await createComment({
+          content: this.commentForm.comment,
+          id: this.$route.query.id
+        });
+        if (resultCode === "1") {
+          this.getComment();
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
     compileArticle() {
       this.$router.push({
         name: "markdown",
@@ -97,7 +122,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.createComment();
         } else {
           console.log("error submit!!");
           return false;

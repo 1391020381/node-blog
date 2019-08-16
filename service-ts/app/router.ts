@@ -12,4 +12,6 @@ export default (app: Application) => {
   router.post('/updateArticle', controller.post.updateArticles)
   router.post('/deleteArticles', controller.post.deleteArticles)
   router.post('/articlesList', controller.post.articlesList)
+  router.post('/createComment', controller.comment.createComment)
+  router.post('/getComment', controller.comment.getComment)
 };
