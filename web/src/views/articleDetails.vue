@@ -44,16 +44,20 @@
           </el-form-item>
         </el-form>
       </el-card>
+      <commentList :post="commentList"></commentList>
     </div>
   </div>
 </template>
 
 <script>
+import commentList from "@/components/commentList";
 import { getArticlesDetail, deleteArticles } from "@/api/post";
 import { createComment, getComment } from "@/api/comment";
 export default {
   name: "articleDetails",
-  components: {},
+  components: {
+    commentList
+  },
   props: {},
   data() {
     return {
@@ -71,6 +75,7 @@ export default {
   },
   created() {
     this.getArticlesDetail();
+    this.getComment();
   },
   mounted() {},
   activated() {},

@@ -16,11 +16,22 @@ export default class PostController extends Controller {
   public async getArticlesDetail() {
     try {
       const { ctx, service } = this
-      const id = ctx.query.id  // 文章
+      const id = ctx.request.query.id  // 文章
       this.ctx.logger.info('ctx.query.id', ctx.query)
       const authorId = ctx.session.userInfo._id  // 作者
-      const result = await service.post.getArticlesDetail(id, authorId)
-      ctx.body = result
+      if (authorId) {
+        const result = await service.post.getArticlesDetail(id, authorId)
+        ctx.body = result
+      } else {
+        ctx.body = {
+          result: {
+            errorMessage: '请登录'
+
+          },
+          resultCode: '1'
+        }
+      }
+
     } catch (e) {
       this.ctx.logger.info(e)
     }
